@@ -1,0 +1,127 @@
+<!doctype html>
+<title>Visualizing 2D arrays</title>
+
+<style>
+
+    #stage {
+        position: relative;
+    }
+
+    .cell {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border: 1px solid black;
+        background-color: white;
+    }
+
+</style>
+
+<div id="stage"></div>
+
+<script>
+
+    var serverMap = null;
+
+    var exampleSocket = new WebSocket("ws://localhost:8765/");
+    exampleSocket.onopen = function (event) {
+        exampleSocket.send("Here's some text that the server is urgently awaiting!");
+    };
+    exampleSocket.onmessage = function (event) {
+        var message = JSON.parse(event.data)
+        console.log(typeof(message))
+        if (message.type === 'map'){
+            serverMap = message.map;
+            console.log(serverMap)
+        }
+    }
+/*
+    var multiplayer ={
+        webSocketHost: "ws://localhost:8765/",
+        webSocket: undefined,
+
+        init : function(){
+            this.webSocket = new WebSocket(this.webSocketHost);
+            this.webSocket.onopen = this.handleOnOpen;
+            this.webSocket.onmessage = this.handleOnMessage;
+            this.webSocket.onerror = this.handleOnError;
+            this.webSocket.onclose = this.handleOnClose;
+        },
+
+         handleOnOpen: function(event){
+             this.webSocket.send("Here's some text that the server is urgently awaiting!");
+         },
+
+        handleOnMessage: function(event){
+            var message = JSON.parse(event.data)
+            console.log(typeof(message))
+            if (message.type === 'map'){
+                serverMap = message.map;
+                console.log(serverMap)
+            }
+        }
+    }
+*/
+
+    setTimeout(function(){
+    //Get a reference to the stage
+    var stage = document.querySelector("#stage");
+
+    //The 2D array that defines the map
+    if (serverMap){
+        map = serverMap
+    } else{
+        var map =
+                [
+                    [1, 0, 1],
+                    [0, 2, 0],
+                    [1, 0, 3]
+                ];
+    }
+
+    //The size of each cell
+    var SIZE = 30;
+
+    //The space between each cell
+    var SPACE = 10;
+
+    //Display the array
+    var ROWS = map.length;
+    var COLUMNS = map[0].length;
+
+    for (var row = 0; row < ROWS; row++) {
+        for (var column = 0; column < COLUMNS; column++) {
+            //Create a div HTML element called cell
+            var cell = document.createElement("div");
+
+            //Set it's CSS class to "cell"
+            cell.setAttribute("class", "cell");
+
+            //Add the div HTML element to the stage
+            stage.appendChild(cell);
+
+            //Make it black if it's a "1"
+            switch (map[row][column]) {
+                case 1:
+                    cell.style.backgroundColor = "black";
+                    break;
+                case 2:
+                    cell.style.backgroundColor = "red";
+                    break;
+                case 3:
+                    cell.style.backgroundColor = "blue";
+                    break;
+            }
+
+
+            //Position the cell in the correct place
+            //with 10 pixels of space around it
+            cell.style.top = row * (SIZE + SPACE) + "px";
+            cell.style.left = column * (SIZE + SPACE) + "px";
+        }
+    }
+
+    }, 1000);
+
+</script>
+
