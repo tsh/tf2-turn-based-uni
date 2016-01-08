@@ -19,19 +19,18 @@ import com.badlogic.gdx.graphics.Color;
 public class Tf2Client extends ApplicationAdapter {
 	SpriteBatch batch;
     ShapeRenderer shapeRenderer;
+    World world;
     int[][] map;
+    Demoman dm;
+
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-        map = new int[][]{
-                {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 55, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-        };
         shapeRenderer = new ShapeRenderer();
+        this.world = new World();
+        this.map = world.getMap();
+        this.dm = new Demoman();
     }
 
 	@Override
@@ -39,10 +38,11 @@ public class Tf2Client extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        drawMap(batch);
-		batch.end();
-
-
+        Texture t = new Texture("tilemap.png");
+        batch.draw(t, 0,0);
+//        drawMap(batch);
+        dm.draw(batch);
+        batch.end();
 	}
 
 
