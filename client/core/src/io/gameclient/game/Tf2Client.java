@@ -20,8 +20,8 @@ public class Tf2Client extends ApplicationAdapter {
     ShapeRenderer shapeRenderer;
     World world;
     Map map;
+    GameObjectsManager gameObjectsManager;
     private OrthographicCamera camera;
-    Demoman dm;
 
 
 	@Override
@@ -32,7 +32,7 @@ public class Tf2Client extends ApplicationAdapter {
         camera.setToOrtho(false, 700, 500);
         this.world = new World();
         this.map = new Map();
-        this.dm = new Demoman();
+        this.gameObjectsManager = new GameObjectsManager();
     }
 
 	@Override
@@ -42,7 +42,7 @@ public class Tf2Client extends ApplicationAdapter {
         batch.setProjectionMatrix(camera.combined);
 		batch.begin();
         this.map.render(batch);
-        dm.draw(batch);
+        this.gameObjectsManager.render(batch);
         batch.end();
 	}
 

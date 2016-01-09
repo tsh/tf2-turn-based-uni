@@ -11,7 +11,7 @@ public class Demoman extends GameObject{
         this.texture = new Texture(Gdx.files.internal("characters/blue_demo_alfa.png"));
     }
 
-    public void draw(SpriteBatch batch){
-        batch.draw(this.texture, 0,0);
+    public void render(SpriteBatch batch, float x, float y){
+        batch.draw(this.texture, x, y);
     }
 }
