@@ -7,7 +7,7 @@ public class Demoman extends GameObject{
     Texture texture;
 
     public Demoman(){
-        this.texture = new Texture("characters.png");
+        this.texture = new Texture("demo.png");
     }
 
     public void draw(SpriteBatch batch){
