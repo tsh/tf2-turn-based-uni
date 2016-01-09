@@ -19,11 +19,12 @@ public class Map {
 
     public Map(){
         this.map = new int[][]{
-                {0, 0, 0, 0, 0,},
-                {0, 0, 0, 0, 0,},
-                {0, 0, 0, 0, 0,},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
                 {0, 0, 1, 0, 0,},
-                {0, 0, 0, 0, 0,}
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
         };
         this.dirt = new Texture(Gdx.files.internal("tiles/dirt_1.png"));
         this.white = new Texture(Gdx.files.internal("tiles/white_100_100.png"));
