@@ -33,6 +33,7 @@ public class Tf2Client extends ApplicationAdapter {
         this.world = new World();
         this.map = new Map();
         this.gameObjectsManager = new GameObjectsManager();
+        Gdx.input.setInputProcessor(new MyInputHandler(camera, gameObjectsManager));
     }
 
 	@Override

@@ -32,4 +32,11 @@ public class GameObjectsManager {
             }
         }
     }
+
+    public void inputReceived(float worldX, float worldY){
+        int row = (int)Math.floor(worldX/100);
+        int column = (int)Math.floor(worldY/100);
+        GameObject go = this.gameObjectsMap[row][column];
+        go.toggleSelected();
+    }
 }

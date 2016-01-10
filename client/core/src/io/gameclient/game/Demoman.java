@@ -12,6 +12,7 @@ public class Demoman extends GameObject{
     }
 
     public void render(SpriteBatch batch, float x, float y){
+        super.render(batch, x, y);
         batch.draw(this.texture, x, y);
     }
 }
