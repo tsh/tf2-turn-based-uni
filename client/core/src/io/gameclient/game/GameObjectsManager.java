@@ -7,9 +7,7 @@ public class GameObjectsManager {
     public final Integer TILE_WIDTH = 100;
     public final Integer TILE_HEIGHT = 100;
 
-    public final Integer EMPTY = 0;
-    public final Integer SCOUT = 1;
-    public final Integer DEMOMAN = 2;
+    private GameObject currentlySelectedObject = null;
 
     GameObject[][] gameObjectsMap;
 
@@ -34,9 +32,17 @@ public class GameObjectsManager {
     }
 
     public void inputReceived(float worldX, float worldY){
-        int row = (int)Math.floor(worldX/100);
-        int column = (int)Math.floor(worldY/100);
-        GameObject go = this.gameObjectsMap[row][column];
-        go.toggleSelected();
+        int row = (int)Math.floor(worldX / 100);
+        int column = (int)Math.floor(worldY / 100);
+        GameObject clickedObject = this.gameObjectsMap[row][column];
+        if (currentlySelectedObject == null){
+            clickedObject.setSelected();
+            currentlySelectedObject = clickedObject;
+        }
+        else if (currentlySelectedObject == clickedObject){
+            clickedObject.toggleSelected();
+            currentlySelectedObject = null;
+        }
+
     }
 }
