@@ -35,14 +35,39 @@ public class GameObjectsManager {
         int row = (int)Math.floor(worldX / 100);
         int column = (int)Math.floor(worldY / 100);
         GameObject clickedObject = this.gameObjectsMap[row][column];
-        if (currentlySelectedObject == null){
+        // set selection
+        if (currentlySelectedObject == null || currentlySelectedObject instanceof EmptyGameObject){
             clickedObject.setSelected();
             currentlySelectedObject = clickedObject;
         }
+        // unset selection
         else if (currentlySelectedObject == clickedObject){
             clickedObject.toggleSelected();
             currentlySelectedObject = null;
         }
+        // move object to empty location
+        if ((clickedObject instanceof EmptyGameObject) && (currentlySelectedObject != null) && !(currentlySelectedObject instanceof EmptyGameObject)){
+            moveObject(currentlySelectedObject, row, column);
+        }
 
+    }
+
+    public void moveObject(GameObject object, int destinationRow, int destinationColumn){
+        System.out.println("Moved to: " + destinationRow + destinationColumn);
+        System.out.println(getObjectPosition(object)[0]);
+    }
+
+    public int[] getObjectPosition(GameObject object){
+        int[] position = new int[2];
+        for (int i = 0; i < gameObjectsMap.length; i++){
+            for (int j = 0; j < gameObjectsMap[i].length; j++){
+                if (gameObjectsMap[i][j] == object){
+                    position[0] = i;
+                    position[1] = j;
+                    return position;
+                }
+            }
+        }
+        throw new IllegalArgumentException("Object not found in GameObjectArray");
     }
 }
