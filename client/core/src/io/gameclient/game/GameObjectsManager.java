@@ -54,12 +54,12 @@ public class GameObjectsManager {
 
     public void moveObject(GameObject movedObject, int destinationRow, int destinationColumn){
         int[] movedObjectPosition = getObjectPosition(movedObject);
-        // move only to empty space
-        if (gameObjectsMap[destinationRow][destinationColumn] instanceof EmptyGameObject){
-            gameObjectsMap[destinationRow][destinationColumn] = movedObject;
-            gameObjectsMap[movedObjectPosition[0]][movedObjectPosition[1]] = new EmptyGameObject();
-        }
+        gameObjectsMap[destinationRow][destinationColumn] = movedObject;
+        gameObjectsMap[movedObjectPosition[0]][movedObjectPosition[1]] = new EmptyGameObject();
+    }
 
+    public void attackTarget(GameObject object, GameObject target){
+        System.out.print("attacked");
     }
 
     public int[] getObjectPosition(GameObject object){
