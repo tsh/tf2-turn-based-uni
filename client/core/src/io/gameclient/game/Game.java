@@ -34,8 +34,12 @@ public class Game {
 
     public void performAction(GameObject selectedObject, GameObject clickedObject){
         // move object to empty location
-        if ((clickedObject instanceof EmptyGameObject) && (selectedObject instanceof CharacterObject)){
+        if ((selectedObject instanceof CharacterObject) && (clickedObject instanceof EmptyGameObject)){
             this.gameObjectsManager.moveObject(selectedObject, clickedObject);
+        }
+        // attack
+        if ((selectedObject instanceof CharacterObject) &&  (clickedObject instanceof CharacterObject) && !(selectedObject == clickedObject)){
+            this.gameObjectsManager.attackTarget(selectedObject, (CharacterObject)clickedObject);
         }
     }
 

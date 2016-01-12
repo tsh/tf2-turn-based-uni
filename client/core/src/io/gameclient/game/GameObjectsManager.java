@@ -63,8 +63,14 @@ public class GameObjectsManager {
         gameObjectsMap[movedObjectPosition[0]][movedObjectPosition[1]] = new EmptyGameObject();
     }
 
-    public void attackTarget(GameObject object, GameObject target){
-        System.out.print("attacked");
+    public void attackTarget(GameObject attacker, CharacterObject target){
+        removeCharacter(target);
+    }
+
+    private void removeCharacter(CharacterObject characterObject){
+        int[] position = getObjectPosition(characterObject);
+        gameObjectsMap[position[0]][position[1]] = new EmptyGameObject();
+
     }
 
     public int[] getObjectPosition(GameObject object){
