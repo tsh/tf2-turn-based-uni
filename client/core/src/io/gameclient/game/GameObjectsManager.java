@@ -52,9 +52,14 @@ public class GameObjectsManager {
 
     }
 
-    public void moveObject(GameObject object, int destinationRow, int destinationColumn){
-        System.out.println("Moved to: " + destinationRow + destinationColumn);
-        System.out.println(getObjectPosition(object)[0]);
+    public void moveObject(GameObject movedObject, int destinationRow, int destinationColumn){
+        int[] movedObjectPosition = getObjectPosition(movedObject);
+        // move only to empty space
+        if (gameObjectsMap[destinationRow][destinationColumn] instanceof EmptyGameObject){
+            gameObjectsMap[destinationRow][destinationColumn] = movedObject;
+            gameObjectsMap[movedObjectPosition[0]][movedObjectPosition[1]] = new EmptyGameObject();
+        }
+
     }
 
     public int[] getObjectPosition(GameObject object){
