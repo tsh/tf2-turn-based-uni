@@ -34,7 +34,7 @@ public class Game {
 
     public void performAction(GameObject selectedObject, GameObject clickedObject){
         // move object to empty location
-        if ((clickedObject instanceof EmptyGameObject) && (selectedObject != null) && !(selectedObject instanceof EmptyGameObject)){
+        if ((clickedObject instanceof EmptyGameObject) && (selectedObject instanceof CharacterObject)){
             this.gameObjectsManager.moveObject(selectedObject, clickedObject);
         }
     }

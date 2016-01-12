@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Scout extends GameObject {
+public class Scout extends CharacterObject {
     Texture texture;
     public Team team;
 
