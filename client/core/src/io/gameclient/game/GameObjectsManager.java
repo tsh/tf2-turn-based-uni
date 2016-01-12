@@ -8,10 +8,12 @@ public class GameObjectsManager {
     public final Integer TILE_HEIGHT = 100;
 
     private GameObject currentlySelectedObject = null;
+    private Game game;
 
     GameObject[][] gameObjectsMap;
 
-    public GameObjectsManager(){
+    public GameObjectsManager(Game game){
+        this.game = game;
         this.gameObjectsMap = new GameObject[][]{
                 {new Demoman(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()},
                 {new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()},
@@ -32,8 +34,8 @@ public class GameObjectsManager {
     }
 
     public void inputReceived(float worldX, float worldY){
-        int row = (int)Math.floor(worldX / 100);
-        int column = (int)Math.floor(worldY / 100);
+        int row = (int)Math.floor(worldX / TILE_WIDTH);
+        int column = (int)Math.floor(worldY / TILE_HEIGHT);
         GameObject clickedObject = this.gameObjectsMap[row][column];
         // set selection
         if (currentlySelectedObject == null || currentlySelectedObject instanceof EmptyGameObject){
@@ -45,15 +47,19 @@ public class GameObjectsManager {
             clickedObject.toggleSelected();
             currentlySelectedObject = null;
         }
-        // move object to empty location
-        if ((clickedObject instanceof EmptyGameObject) && (currentlySelectedObject != null) && !(currentlySelectedObject instanceof EmptyGameObject)){
-            moveObject(currentlySelectedObject, row, column);
-        }
+        this.game.performAction(currentlySelectedObject, clickedObject);
     }
 
     public void moveObject(GameObject movedObject, int destinationRow, int destinationColumn){
         int[] movedObjectPosition = getObjectPosition(movedObject);
         gameObjectsMap[destinationRow][destinationColumn] = movedObject;
+        gameObjectsMap[movedObjectPosition[0]][movedObjectPosition[1]] = new EmptyGameObject();
+    }
+
+    public void moveObject(GameObject movedObject, GameObject destinationObject){
+        int[] movedObjectPosition = getObjectPosition(movedObject);
+        int[] destinationPosition = getObjectPosition(destinationObject);
+        gameObjectsMap[destinationPosition[0]][destinationPosition[1]] = movedObject;
         gameObjectsMap[movedObjectPosition[0]][movedObjectPosition[1]] = new EmptyGameObject();
     }
 

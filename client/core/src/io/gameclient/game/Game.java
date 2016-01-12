@@ -18,7 +18,7 @@ public class Game {
         this.bluePlayer = new Player(Team.BLUE);
         this.currentPlayer = this.bluePlayer;
         this.canPlayerMove = true;
-        this.gameObjectsManager = new GameObjectsManager();
+        this.gameObjectsManager = new GameObjectsManager(this);
     }
 
     public void endTurn(){
@@ -29,6 +29,13 @@ public class Game {
             this.currentPlayer = this.redPlayer;
         }
         this.canPlayerMove = true;
+    }
+
+    public void performAction(GameObject selectedObject, GameObject clickedObject){
+        // move object to empty location
+        if ((clickedObject instanceof EmptyGameObject) && (selectedObject != null) && !(selectedObject instanceof EmptyGameObject)){
+            this.gameObjectsManager.moveObject(selectedObject, clickedObject);
+        }
     }
 
     public void inputReceived(float worldX, float worldY){
