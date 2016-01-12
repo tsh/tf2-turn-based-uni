@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Demoman extends GameObject{
     Texture texture;
 
-    public Demoman(){
-        this.texture = new Texture(Gdx.files.internal("characters/blue_demo_alfa.png"));
+    public Demoman(Team team){
+        if (team == Team.BLUE) {this.texture = new Texture(Gdx.files.internal("characters/blue_demo_alfa.png"));}
+        else {this.texture = new Texture(Gdx.files.internal("characters/red_demo_alfa.png"));}
+
     }
 
     public void render(SpriteBatch batch, float x, float y){

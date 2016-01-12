@@ -15,11 +15,11 @@ public class GameObjectsManager {
     public GameObjectsManager(Game game){
         this.game = game;
         this.gameObjectsMap = new GameObject[][]{
-                {new Demoman(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()},
+                {new Demoman(Team.BLUE), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new Demoman(Team.RED)},
                 {new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()},
                 {new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()},
                 {new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(),},
-                {new EmptyGameObject(), new Scout(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()},
+                {new EmptyGameObject(), new Scout(Team.BLUE), new EmptyGameObject(), new EmptyGameObject(), new Scout(Team.RED)},
                 {new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()}
         };
     }

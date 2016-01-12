@@ -29,6 +29,7 @@ public class Game {
             this.currentPlayer = this.redPlayer;
         }
         this.canPlayerMove = true;
+        System.out.println(currentPlayer);
     }
 
     public void performAction(GameObject selectedObject, GameObject clickedObject){
