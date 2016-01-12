@@ -20,7 +20,7 @@ public class Tf2Client extends ApplicationAdapter {
     ShapeRenderer shapeRenderer;
     World world;
     Map map;
-    GameObjectsManager gameObjectsManager;
+    Game game;
     private OrthographicCamera camera;
 
 
@@ -32,8 +32,8 @@ public class Tf2Client extends ApplicationAdapter {
         camera.setToOrtho(false, 700, 500);
         this.world = new World();
         this.map = new Map();
-        this.gameObjectsManager = new GameObjectsManager();
-        Gdx.input.setInputProcessor(new MyInputHandler(camera, gameObjectsManager));
+        this.game = new Game();
+        Gdx.input.setInputProcessor(new MyInputHandler(camera, this.game));
     }
 
 	@Override
@@ -43,7 +43,7 @@ public class Tf2Client extends ApplicationAdapter {
         batch.setProjectionMatrix(camera.combined);
 		batch.begin();
         this.map.render(batch);
-        this.gameObjectsManager.render(batch);
+        this.game.render(batch);
         batch.end();
 	}
 

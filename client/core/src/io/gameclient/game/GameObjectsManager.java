@@ -49,7 +49,6 @@ public class GameObjectsManager {
         if ((clickedObject instanceof EmptyGameObject) && (currentlySelectedObject != null) && !(currentlySelectedObject instanceof EmptyGameObject)){
             moveObject(currentlySelectedObject, row, column);
         }
-
     }
 
     public void moveObject(GameObject movedObject, int destinationRow, int destinationColumn){

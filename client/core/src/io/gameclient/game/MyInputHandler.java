@@ -7,11 +7,11 @@ import com.badlogic.gdx.math.Vector3;
 
 public class MyInputHandler extends InputAdapter {
     OrthographicCamera camera;
-    GameObjectsManager gameObjectsManager;
+    Game game;
 
-    public MyInputHandler(OrthographicCamera camera, GameObjectsManager gmo){
+    public MyInputHandler(OrthographicCamera camera, Game game){
         super();
-        this.gameObjectsManager = gmo;
+        this.game = game;
         this.camera = camera;
     }
     @Override
@@ -19,7 +19,7 @@ public class MyInputHandler extends InputAdapter {
         Vector3 touch = new Vector3(x, y, 0);
         camera.unproject(touch);
         if (touch.x <= 500 && touch.y <= 500){
-            gameObjectsManager.inputReceived(touch.x, touch.y);
+            this.game.inputReceived(touch.x, touch.y);
         }
 
         return true; // return true to indicate the event was handled
