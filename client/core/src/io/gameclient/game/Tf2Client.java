@@ -18,7 +18,8 @@ public class Tf2Client extends Game {
 	public void create () {
         font = new BitmapFont();
         batch = new SpriteBatch();
-        this.setScreen(new MainMenuScreen(this));
+//        this.setScreen(new MainMenuScreen(this));
+        this.setScreen(new GameScreen(this));
     }
 
 	@Override
