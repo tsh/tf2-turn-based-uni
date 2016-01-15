@@ -6,14 +6,14 @@ import  java.util.Random;
 
 enum Team { RED, BLUE }
 
-public class Game {
+public class MyGame {
     Player redPlayer;
     Player bluePlayer;
     Player currentPlayer;
     Boolean canPlayerMove;
     GameObjectsManager gameObjectsManager;
 
-    public Game(){
+    public MyGame(){
         this.redPlayer = new Player(Team.RED);
         this.bluePlayer = new Player(Team.BLUE);
         this.currentPlayer = this.bluePlayer;

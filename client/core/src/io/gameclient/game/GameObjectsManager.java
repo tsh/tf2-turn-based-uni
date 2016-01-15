@@ -8,11 +8,11 @@ public class GameObjectsManager {
     public final Integer TILE_HEIGHT = 100;
 
     private GameObject currentlySelectedObject = null;
-    private Game game;
+    private MyGame game;
 
     GameObject[][] gameObjectsMap;
 
-    public GameObjectsManager(Game game){
+    public GameObjectsManager(MyGame game){
         this.game = game;
         this.gameObjectsMap = new GameObject[][]{
                 {new Demoman(Team.BLUE), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new Demoman(Team.RED)},

@@ -7,9 +7,9 @@ import com.badlogic.gdx.math.Vector3;
 
 public class MyInputHandler extends InputAdapter {
     OrthographicCamera camera;
-    Game game;
+    MyGame game;
 
-    public MyInputHandler(OrthographicCamera camera, Game game){
+    public MyInputHandler(OrthographicCamera camera, MyGame game){
         super();
         this.game = game;
         this.camera = camera;
