@@ -2,18 +2,25 @@ package io.gameclient.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class MainMenuScreen implements Screen {
     final Tf2Client game;
     OrthographicCamera camera;
+    Music backgroundMusic;
 
     public MainMenuScreen(final Tf2Client gam) {
         game = gam;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
+
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/background/rocket_jump_waltz.mp3"));
+        backgroundMusic.setVolume(0.5f);
+        backgroundMusic.setLooping(true);
+        backgroundMusic.play();
 
     }
 
@@ -58,5 +65,6 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
+        backgroundMusic.dispose();
     }
 }
