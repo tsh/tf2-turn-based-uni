@@ -21,11 +21,15 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class MainMenuScreen implements Screen {
+    float WIDTH = 800;
+    float HEIGHT = 480;
+
     final Tf2Client game;
     OrthographicCamera camera;
 
     Music backgroundMusic;
     Texture backgroundTexture;
+    Texture logo;
 
     private Stage stage;
     private Table table;
@@ -37,7 +41,7 @@ public class MainMenuScreen implements Screen {
         game = gam;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, WIDTH, HEIGHT);
 
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/background/rocket_jump_waltz.mp3"));
         backgroundMusic.setVolume(0.5f);
@@ -45,6 +49,7 @@ public class MainMenuScreen implements Screen {
         backgroundMusic.play();
 
         this.backgroundTexture = new Texture(Gdx.files.internal("ui/2fort_800px.png"));
+        this.logo =  new Texture("ui/tf2_logo.png");
 
         stage = new Stage(new StretchViewport(640, 480));
         Gdx.input.setInputProcessor(stage);
@@ -54,12 +59,13 @@ public class MainMenuScreen implements Screen {
         pixmap.fill();
         skin = new Skin();
         skin.add("white", new Texture(pixmap));
-        skin.add("default", new BitmapFont());
+        BitmapFont bFont = new BitmapFont();
+        BitmapFont.BitmapFontData bfData = bFont.getData();
+        bfData.setScale(2);
+        skin.add("default", bFont);
 
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = skin.newDrawable("white", Color.DARK_GRAY);
-        textButtonStyle.down = skin.newDrawable("white", Color.DARK_GRAY);
-        textButtonStyle.checked = skin.newDrawable("white", Color.BLUE);
+        textButtonStyle.up = skin.newDrawable("white");
         textButtonStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
         textButtonStyle.font = skin.getFont("default");
         skin.add("default", textButtonStyle);
@@ -67,10 +73,13 @@ public class MainMenuScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-        table.setDebug(true);
 
-        final TextButton button = new TextButton("Click me!", skin);
+        final TextButton button = new TextButton("Start Game", skin);
+        final TextButton exitButton = new TextButton("Quit", skin);
         table.add(button);
+        table.row();
+        table.add(exitButton).padTop(10);
+        table.setBounds(75, 30, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         button.addListener(new ChangeListener() {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -78,13 +87,19 @@ public class MainMenuScreen implements Screen {
                 button.setText("Good job!");
             }
         });
-        table.add(new Image(skin.newDrawable("white", Color.RED))).size(64);
+
+        exitButton.addListener(new ChangeListener() {
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                Gdx.app.exit();
+            }
+        });
     }
 
     @Override
     public void render(float delta) {
         stage.getBatch().begin();
         stage.getBatch().draw(this.backgroundTexture, 0, 0);
+        stage.getBatch().draw(this.logo, 0, 0);
         stage.getBatch().end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
