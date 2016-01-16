@@ -23,6 +23,10 @@ public abstract class CharacterObject extends GameObject {
         }
     }
 
+    public boolean canMove(float distance){
+        return distance < getMaxMoveDistance();
+    }
+
 
     abstract public void sayNo();
     abstract public float getMaxAttackDistance();

@@ -52,8 +52,10 @@ public class MyGame {
         /* Parse actions */
         // move
         if ((clickedObject instanceof EmptyGameObject)){
-            this.gameObjectsManager.moveObject(selectedObject, clickedObject);
-            endTurn();
+            if (canMove((CharacterObject)selectedObject, (EmptyGameObject) clickedObject)) {
+                this.gameObjectsManager.moveObject(selectedObject, clickedObject);
+                endTurn();
+            }
         }
         // attack
         else if ((clickedObject instanceof CharacterObject) && !(selectedObject == clickedObject)){
@@ -64,21 +66,23 @@ public class MyGame {
         }
     }
 
+
     public boolean canPerformAction(CharacterObject character){
         return character.player == currentPlayer && currentPlayer.canPerformAction;
     }
 
 
+    public boolean canMove(CharacterObject movable, EmptyGameObject destination){
+        float distance = this.gameObjectsManager.getDistanceBetweenObjects(movable, destination);
+        System.out.println("Move dist: " + distance);
+        return movable.canMove(distance);
+    };
+
+
     public boolean canAttack(CharacterObject attacker, CharacterObject target){
-        if (! canPerformAction(attacker)){
-            return false;
-        }
         float distance = this.gameObjectsManager.getDistanceBetweenObjects(attacker, target);
-        System.out.println(distance);
-        if (attacker.canAttack(target, distance)) {
-            return true;
-        }
-        return false;
+        System.out.println("Attack dist: " + distance);
+        return attacker.canAttack(target, distance);
     }
 
 
