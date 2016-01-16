@@ -5,22 +5,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public abstract class CharacterObject extends GameObject {
-    public Team team;
+    public Player player;
     Preferences prefs;
 
-    public CharacterObject(Team team){
-        this.team = team;
+    public CharacterObject(Player player){
+        this.player = player;
         prefs = Gdx.app.getPreferences("Preferences");
     }
 
     public boolean canAttack(CharacterObject target){
-        if (this.team != target.team){
+        if (this.player.team != target.player.team){
             return true;
         } else {
             sayNo();
             return false;
         }
-    };
+    }
 
     abstract public void sayNo();
 }

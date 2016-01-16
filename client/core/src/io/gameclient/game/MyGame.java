@@ -29,7 +29,7 @@ public class MyGame {
             this.currentPlayer = this.redPlayer;
         }
         this.canPlayerMove = true;
-        System.out.println(currentPlayer);
+        System.out.println(currentPlayer.team + " " + currentPlayer.canPerformAction);
     }
 
 
@@ -38,19 +38,24 @@ public class MyGame {
         // move object to empty location
         if ((selectedObject instanceof CharacterObject) && (clickedObject instanceof EmptyGameObject)){
             this.gameObjectsManager.moveObject(selectedObject, clickedObject);
+            endTurn();
         }
-
         // attack
-        if ((selectedObject instanceof CharacterObject) &&  (clickedObject instanceof CharacterObject) && !(selectedObject == clickedObject)){
+        else if ((selectedObject instanceof CharacterObject) &&  (clickedObject instanceof CharacterObject) && !(selectedObject == clickedObject)){
             if (canAttack((CharacterObject)selectedObject, (CharacterObject)clickedObject)) {
                 this.gameObjectsManager.attackTarget(selectedObject, (CharacterObject) clickedObject);
+                endTurn();
             }
         }
     }
 
+    public boolean canPerformAction(CharacterObject character){
+        return character.player == currentPlayer && currentPlayer.canPerformAction;
+    }
+
 
     public boolean canAttack(CharacterObject attacker, CharacterObject target){
-        if (!currentPlayer.canPerformAction){
+        if (! canPerformAction(attacker)){
             return false;
         }
         if (attacker.canAttack(target)) {

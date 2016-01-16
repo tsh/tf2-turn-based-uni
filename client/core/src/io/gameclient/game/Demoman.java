@@ -9,9 +9,9 @@ public class Demoman extends CharacterObject{
     Texture texture;
     Sound noSound;
 
-    public Demoman(Team team) {
-        super(team);
-        if (team == Team.BLUE) {
+    public Demoman(Player player) {
+        super(player);
+        if (player.team == Team.BLUE) {
             this.texture = new Texture(Gdx.files.internal("characters/blue_demo_alfa.png"));
         } else {
             this.texture = new Texture(Gdx.files.internal("characters/red_demo_alfa.png"));
