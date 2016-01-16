@@ -18,4 +18,8 @@ public class Scout extends CharacterObject {
         super.render(batch, x, y);
         batch.draw(this.texture, x, y);
     }
+
+    public void sayNo(){
+        System.out.print("NO!");
+    }
 }
