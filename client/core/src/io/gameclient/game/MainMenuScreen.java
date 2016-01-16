@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -55,7 +56,7 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.WHITE);
+        pixmap.setColor(Gdx2DPixmap.GDX2D_FORMAT_ALPHA);
         pixmap.fill();
         skin = new Skin();
         skin.add("white", new Texture(pixmap));
@@ -79,12 +80,13 @@ public class MainMenuScreen implements Screen {
         table.add(button);
         table.row();
         table.add(exitButton).padTop(10);
+        table.left().pad(20);
         table.setBounds(75, 30, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         button.addListener(new ChangeListener() {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                System.out.println("Clicked! Is checked: " + button.isChecked());
-                button.setText("Good job!");
+            game.setScreen(new GameScreen(game));
+            dispose();
             }
         });
 
@@ -104,11 +106,6 @@ public class MainMenuScreen implements Screen {
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-//
-//        if (Gdx.input.isTouched()) {
-//            game.setScreen(new GameScreen(game));
-//            dispose();
-//        }
     }
 
     @Override
@@ -136,5 +133,7 @@ public class MainMenuScreen implements Screen {
     public void dispose() {
         stage.dispose();
         backgroundMusic.dispose();
+        logo.dispose();
+        backgroundTexture.dispose();
     }
 }
