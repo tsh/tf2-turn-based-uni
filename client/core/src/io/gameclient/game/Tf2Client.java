@@ -19,8 +19,8 @@ public class Tf2Client extends Game {
         if (!prefs.contains("lang")) {
             prefs.putInteger("lang", Langs.EN);
         }
-        this.setScreen(new MainMenuScreen(this));
-//        this.setScreen(new GameScreen(this));
+//        this.setScreen(new MainMenuScreen(this));
+        this.setScreen(new GameScreen(this));
     }
 
 	@Override

@@ -6,10 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Demoman extends CharacterObject{
     Texture texture;
-    public Team team;
 
     public Demoman(Team team){
-        this.team = team;
+        super(team);
         if (team == Team.BLUE) {this.texture = new Texture(Gdx.files.internal("characters/blue_demo_alfa.png"));}
         else {this.texture = new Texture(Gdx.files.internal("characters/red_demo_alfa.png"));}
 
