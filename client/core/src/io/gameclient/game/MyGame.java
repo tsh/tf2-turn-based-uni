@@ -10,14 +10,12 @@ public class MyGame {
     Player redPlayer;
     Player bluePlayer;
     Player currentPlayer;
-    Boolean canPlayerMove;
     GameObjectsManager gameObjectsManager;
 
     public MyGame(){
         this.redPlayer = new Player(Team.RED, false);
         this.bluePlayer = new Player(Team.BLUE, true);
         this.currentPlayer = this.bluePlayer;
-        this.canPlayerMove = true;
         this.gameObjectsManager = new GameObjectsManager(this);
     }
 
@@ -28,20 +26,27 @@ public class MyGame {
         } else {
             this.currentPlayer = this.redPlayer;
         }
-        this.canPlayerMove = true;
+        this.currentPlayer.canPerformAction = true;
         System.out.println(currentPlayer.team + " " + currentPlayer.canPerformAction);
     }
 
 
     public void performAction(GameObject selectedObject, GameObject clickedObject){
-        // Parse actions
-        // move object to empty location
-        if ((selectedObject instanceof CharacterObject) && (clickedObject instanceof EmptyGameObject)){
+        // Chars only
+        if (!(selectedObject instanceof CharacterObject)){
+            return;
+        }
+        if (!canPerformAction((CharacterObject)selectedObject)){
+            return;
+        }
+        /* Parse actions */
+        // move
+        if ((clickedObject instanceof EmptyGameObject)){
             this.gameObjectsManager.moveObject(selectedObject, clickedObject);
             endTurn();
         }
         // attack
-        else if ((selectedObject instanceof CharacterObject) &&  (clickedObject instanceof CharacterObject) && !(selectedObject == clickedObject)){
+        else if ((clickedObject instanceof CharacterObject) && !(selectedObject == clickedObject)){
             if (canAttack((CharacterObject)selectedObject, (CharacterObject)clickedObject)) {
                 this.gameObjectsManager.attackTarget(selectedObject, (CharacterObject) clickedObject);
                 endTurn();
