@@ -74,9 +74,26 @@ public class MainMenuScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
+        // MENU
+        String startGameText = "";
+        String quitGameText = "";
 
-        final TextButton button = new TextButton("Start Game", skin);
-        final TextButton exitButton = new TextButton("Quit", skin);
+        switch (game.prefs.getInteger("lang")){
+            case Langs.EN:
+                startGameText = "Start Game";
+                quitGameText = "Quit";
+                break;
+            case Langs.FR:
+                startGameText = "Démarrer le jeu";
+                quitGameText = "Quitter";
+                break;
+            case Langs.DE:
+                startGameText = "Spiel beginnen";
+                quitGameText = "Verlassen";
+                break;
+        }
+        final TextButton button = new TextButton(startGameText, skin);
+        final TextButton exitButton = new TextButton(quitGameText, skin);
         table.add(button);
         table.row();
         table.add(exitButton).padTop(10);
