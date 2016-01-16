@@ -73,7 +73,9 @@ public class MyGame {
         if (! canPerformAction(attacker)){
             return false;
         }
-        if (attacker.canAttack(target)) {
+        float distance = this.gameObjectsManager.getDistanceBetweenObjects(attacker, target);
+        System.out.println(distance);
+        if (attacker.canAttack(target, distance)) {
             return true;
         }
         return false;

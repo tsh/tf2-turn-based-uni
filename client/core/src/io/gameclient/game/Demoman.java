@@ -30,6 +30,9 @@ public class Demoman extends CharacterObject{
         }
     }
 
+    public float getMaxAttackDistance(){return 3.0f;}
+    public float getMaxMoveDistance(){return 3.0f;}
+
 
     public void render(SpriteBatch batch, float x, float y){
         super.render(batch, x, y);

@@ -2,6 +2,7 @@ package io.gameclient.game;
 
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public class GameObjectsManager {
     public final Integer TILE_WIDTH = 100;
@@ -40,13 +41,17 @@ public class GameObjectsManager {
         // set selection
         if (currentlySelectedObject == null || currentlySelectedObject instanceof EmptyGameObject){
             clickedObject.setSelected();
+            // highlight action pattern
+            if (clickedObject instanceof CharacterObject){ highlightPattern((CharacterObject)clickedObject);}
             currentlySelectedObject = clickedObject;
         }
         // unset selection
         else if (currentlySelectedObject == clickedObject){
             clickedObject.toggleSelected();
+            if (clickedObject instanceof CharacterObject){ undoHighlightPattern((CharacterObject)clickedObject);}
             currentlySelectedObject = null;
         }
+
         this.game.performAction(currentlySelectedObject, clickedObject);
     }
 
@@ -87,6 +92,20 @@ public class GameObjectsManager {
         throw new IllegalArgumentException("Object not found in GameObjectArray");
     }
 
+    public Vector2 getObjectPositionVector(GameObject object){
+        Vector2 position = new Vector2(0.0f, 0.0f);
+        for (int i = 0; i < gameObjectsMap.length; i++){
+            for (int j = 0; j < gameObjectsMap[i].length; j++){
+                if (gameObjectsMap[i][j] == object){
+                    position.x = i;
+                    position.y = j;
+                    return position;
+                }
+            }
+        }
+        throw new IllegalArgumentException("Object not found in GameObjectArray");
+    }
+
     public int getLiveTeamCharacterCount(Team team){
         int count = 0;
         for (int i = 0; i < gameObjectsMap.length; i++){
@@ -98,5 +117,19 @@ public class GameObjectsManager {
             }
         }
         return count;
+    }
+
+    public void highlightPattern(CharacterObject origin){
+        System.out.println('h');
+    };
+
+    public void undoHighlightPattern(CharacterObject origin){
+        System.out.println('u');
+    }
+
+    public float getDistanceBetweenObjects(GameObject origin, GameObject dest){
+        Vector2 originPosition = getObjectPositionVector(origin);
+        Vector2 destPosition = getObjectPositionVector(dest);
+        return originPosition.dst(destPosition);
     }
 }

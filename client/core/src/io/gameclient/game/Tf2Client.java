@@ -17,7 +17,7 @@ public class Tf2Client extends Game {
         batch = new SpriteBatch();
         prefs = Gdx.app.getPreferences("Preferences");
         if (!prefs.contains("lang")) {
-            prefs.putInteger("lang", Langs.FR);
+            prefs.putInteger("lang", Langs.EN);
         }
 //        this.setScreen(new MainMenuScreen(this));
         this.setScreen(new GameScreen(this));
