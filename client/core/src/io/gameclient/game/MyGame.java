@@ -28,6 +28,16 @@ public class MyGame {
         }
         this.currentPlayer.canPerformAction = true;
         System.out.println(currentPlayer.team + " " + currentPlayer.canPerformAction);
+        // Check win condition
+        int liveBlue = this.gameObjectsManager.getLiveTeamCharacterCount(Team.BLUE);
+        int liveRed = this.gameObjectsManager.getLiveTeamCharacterCount(Team.RED);
+        if (liveBlue == 0 ){
+            System.out.print("RED IS VICTORIOUS");
+        }
+        if (liveRed == 0 ){
+            System.out.print("BLUE is Victorious");
+        }
+
     }
 
 

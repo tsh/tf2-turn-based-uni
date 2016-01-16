@@ -86,4 +86,17 @@ public class GameObjectsManager {
         }
         throw new IllegalArgumentException("Object not found in GameObjectArray");
     }
+
+    public int getLiveTeamCharacterCount(Team team){
+        int count = 0;
+        for (int i = 0; i < gameObjectsMap.length; i++){
+            for (int j = 0; j < gameObjectsMap[i].length; j++){
+                if (gameObjectsMap[i][j] instanceof CharacterObject){
+                    CharacterObject chr = (CharacterObject)gameObjectsMap[i][j];
+                    if (chr.player.team == team) {count += 1;}
+                }
+            }
+        }
+        return count;
+    }
 }
