@@ -5,22 +5,34 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class GameScreen implements Screen {
     final Tf2Client game;
 
-    ShapeRenderer shapeRenderer;
     World world;
     Map map;
     MyGame tf2Game;
     private OrthographicCamera camera;
+    Viewport viewport;
 
     public GameScreen(final Tf2Client gam){
         game = gam;
 
-        shapeRenderer = new ShapeRenderer();
+        float w = Gdx.graphics.getWidth();
+        float h = Gdx.graphics.getHeight();
+
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 700, 500);
+        //viewport = new ExtendViewport(w,h,camera);
+        //viewport.apply();
+        // dev: 480 854
+        // opt: 600, 500
         this.world = new World();
         this.map = new Map();
         this.tf2Game = new MyGame();
@@ -36,6 +48,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         this.map.render(game.batch);
@@ -45,7 +58,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        camera.viewportWidth = 700f;
+        camera.viewportHeight = 500f;
+        //viewport.update(width,height);
+        camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
     }
 
     @Override
