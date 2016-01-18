@@ -42,13 +42,13 @@ public class GameObjectsManager {
         if (currentlySelectedObject == null || currentlySelectedObject instanceof EmptyGameObject){
             clickedObject.setSelected();
             // highlight action pattern
-            if (clickedObject instanceof CharacterObject){ highlightPattern((CharacterObject)clickedObject);}
+            if (clickedObject instanceof CharacterObject){ highlightPatternMove((CharacterObject) clickedObject);}
             currentlySelectedObject = clickedObject;
         }
         // unset selection
         else if (currentlySelectedObject == clickedObject){
             clickedObject.toggleSelected();
-            if (clickedObject instanceof CharacterObject){ undoHighlightPattern((CharacterObject)clickedObject);}
+            if (clickedObject instanceof CharacterObject){ undoHighlightPattern();}
             currentlySelectedObject = null;
         }
 
@@ -119,12 +119,22 @@ public class GameObjectsManager {
         return count;
     }
 
-    public void highlightPattern(CharacterObject origin){
-        System.out.println('h');
+    public void highlightPatternMove(CharacterObject origin){
+        for (int i = 0; i < gameObjectsMap.length; i++){
+            for (int j = 0; j < gameObjectsMap[i].length; j++){
+                    if (getDistanceBetweenObjects(origin, gameObjectsMap[i][j]) < origin.getMaxMoveDistance()){
+                        gameObjectsMap[i][j].setHilightedMoveTrue();
+                    }
+                }
+            }
     };
 
-    public void undoHighlightPattern(CharacterObject origin){
-        System.out.println('u');
+    public void undoHighlightPattern(){
+        for (int i = 0; i < gameObjectsMap.length; i++){
+            for (int j = 0; j < gameObjectsMap[i].length; j++){
+                gameObjectsMap[i][j].setHilightedMoveFalse();
+            }
+        }
     }
 
     public float getDistanceBetweenObjects(GameObject origin, GameObject dest){
