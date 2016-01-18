@@ -18,7 +18,7 @@ public class MyInputHandler extends InputAdapter {
     public boolean touchDown(int x, int y, int pointer, int button) {
         Vector3 touch = new Vector3(x, y, 0);
         camera.unproject(touch);
-        if (touch.x <= 500 && touch.y <= 500){
+        if (touch.x <= 600 && touch.y <= 500){
             this.game.inputReceived(touch.x, touch.y);
         }
 
