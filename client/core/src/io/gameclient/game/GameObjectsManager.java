@@ -42,7 +42,7 @@ public class GameObjectsManager {
         if (currentlySelectedObject == null || currentlySelectedObject instanceof EmptyGameObject){
             clickedObject.setSelected();
             // highlight action pattern
-            if (clickedObject instanceof CharacterObject){ highlightPatternMove((CharacterObject) clickedObject);}
+            if (clickedObject instanceof CharacterObject){ highlightPattern((CharacterObject) clickedObject);}
             currentlySelectedObject = clickedObject;
         }
         // unset selection
@@ -119,20 +119,26 @@ public class GameObjectsManager {
         return count;
     }
 
-    public void highlightPatternMove(CharacterObject origin){
-        for (int i = 0; i < gameObjectsMap.length; i++){
-            for (int j = 0; j < gameObjectsMap[i].length; j++){
-                    if (getDistanceBetweenObjects(origin, gameObjectsMap[i][j]) < origin.getMaxMoveDistance()){
-                        gameObjectsMap[i][j].setHilightedMoveTrue();
-                    }
+    public void highlightPattern(CharacterObject origin) {
+        for (int i = 0; i < gameObjectsMap.length; i++) {
+            for (int j = 0; j < gameObjectsMap[i].length; j++) {
+                float distance = getDistanceBetweenObjects(origin, gameObjectsMap[i][j]);
+                System.out.println(distance + " " + origin.getMaxMoveDistance() + " " + origin.getMaxAttackDistance());
+                if (distance < origin.getMaxMoveDistance()) {
+                    gameObjectsMap[i][j].setHilightedMoveTrue();
+                }
+                if (distance < origin.getMaxAttackDistance()){
+                    gameObjectsMap[i][j].setHighlightedAttackTrue();
                 }
             }
+        }
     };
 
     public void undoHighlightPattern(){
         for (int i = 0; i < gameObjectsMap.length; i++){
             for (int j = 0; j < gameObjectsMap[i].length; j++){
                 gameObjectsMap[i][j].setHilightedMoveFalse();
+                gameObjectsMap[i][j].setHighlightedAttackFalse();
             }
         }
     }
