@@ -11,12 +11,14 @@ public class MyGame {
     Player bluePlayer;
     Player currentPlayer;
     GameObjectsManager gameObjectsManager;
+    MyGameUi ui;
 
     public MyGame(){
         this.redPlayer = new Player(Team.RED, false);
         this.bluePlayer = new Player(Team.BLUE, true);
         this.currentPlayer = this.bluePlayer;
         this.gameObjectsManager = new GameObjectsManager(this);
+        this.ui = new MyGameUi();
     }
 
     public void endTurn(){
@@ -27,6 +29,7 @@ public class MyGame {
             this.currentPlayer = this.redPlayer;
         }
         this.currentPlayer.canPerformAction = true;
+        this.ui.setActiveTeam(currentPlayer.team);
         System.out.println(currentPlayer.team + " " + currentPlayer.canPerformAction);
         // Check win condition
         int liveBlue = this.gameObjectsManager.getLiveTeamCharacterCount(Team.BLUE);
@@ -93,5 +96,10 @@ public class MyGame {
 
     public void render(SpriteBatch batch){
         this.gameObjectsManager.render(batch);
+        this.ui.render(batch);
+    }
+
+    public void dispose(){
+        this.ui.dispose();
     }
 }

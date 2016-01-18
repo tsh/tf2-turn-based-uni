@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -58,7 +59,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        camera.viewportWidth = 700f;
+        camera.viewportWidth = 700; // dev 854
         camera.viewportHeight = 500f;
         //viewport.update(width,height);
         camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
@@ -81,6 +82,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        this.tf2Game.dispose();
     }
 }
