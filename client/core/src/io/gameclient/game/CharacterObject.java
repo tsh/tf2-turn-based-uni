@@ -3,6 +3,7 @@ package io.gameclient.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
 import java.util.List;
@@ -44,4 +45,10 @@ public abstract class CharacterObject extends GameObject {
         int randomIndex = this.random.nextInt(soundsArray.size());
         return soundsArray.get(randomIndex);
     }
+
+    public Music getRandomMusic(List<Music> musicArray){
+        int randomIndex = this.random.nextInt(musicArray.size());
+        return musicArray.get(randomIndex);
+    }
+
 }

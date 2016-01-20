@@ -2,6 +2,7 @@ package io.gameclient.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,6 +16,7 @@ public class EndGameScreen implements Screen {
     private Stage stage;
     Tf2Client game;
     Integer counter;
+    Music backgroundMusic;
 
     public EndGameScreen(Team victoriousTeam, Tf2Client gam){
         this.game = gam;
@@ -25,6 +27,11 @@ public class EndGameScreen implements Screen {
             victoryLogo = new Texture(Gdx.files.internal("ui/blue_win.png"));
         }
         counter = 0;
+
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/background/Announcer_am_flawlessvictory01.wav"));
+        backgroundMusic.setVolume(0.5f);
+        backgroundMusic.setLooping(true);
+        backgroundMusic.play();
     }
 
     @Override
@@ -42,7 +49,7 @@ public class EndGameScreen implements Screen {
         stage.draw();
         counter += 1;
         System.out.println(counter);
-        if (Gdx.input.isTouched() && counter > 80) {
+        if (Gdx.input.isTouched() && counter > 60) {
             this.game.setScreen(new MainMenuScreen(this.game));
             dispose();
         }
@@ -71,6 +78,8 @@ public class EndGameScreen implements Screen {
 
     @Override
     public void dispose() {
+        this.stage.dispose();
         this.victoryLogo.dispose();
+        backgroundMusic.dispose();
     }
 }
