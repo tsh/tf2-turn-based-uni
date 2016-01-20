@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(new MyInputHandler(camera, this.tf2Game));
 
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/background/the-art-of-war.mp3"));
-        backgroundMusic.setVolume(0.1f);
+        backgroundMusic.setVolume(0.2f);
         backgroundMusic.setLooping(true);
         backgroundMusic.play();
     }
