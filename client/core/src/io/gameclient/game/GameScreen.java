@@ -36,7 +36,7 @@ public class GameScreen implements Screen {
         // opt: 600, 500
         this.world = new World();
         this.map = new Map();
-        this.tf2Game = new MyGame();
+        this.tf2Game = new MyGame(gam);
         Gdx.input.setInputProcessor(new MyInputHandler(camera, this.tf2Game));
     }
 

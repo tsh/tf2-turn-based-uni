@@ -12,8 +12,10 @@ public class MyGame {
     Player currentPlayer;
     GameObjectsManager gameObjectsManager;
     MyGameUi ui;
+    Tf2Client game;
 
-    public MyGame(){
+    public MyGame(Tf2Client gam){
+        this.game = gam;
         this.redPlayer = new Player(Team.RED, false);
         this.bluePlayer = new Player(Team.BLUE, true);
         this.currentPlayer = this.bluePlayer;
@@ -36,10 +38,12 @@ public class MyGame {
         int liveBlue = this.gameObjectsManager.getLiveTeamCharacterCount(Team.BLUE);
         int liveRed = this.gameObjectsManager.getLiveTeamCharacterCount(Team.RED);
         if (liveBlue == 0 ){
-            System.out.print("RED IS VICTORIOUS");
+            this.game.setScreen(new EndGameScreen(Team.RED, this.game));
+            dispose();
         }
         if (liveRed == 0 ){
-            System.out.print("BLUE is Victorious");
+            this.game.setScreen(new EndGameScreen(Team.BLUE, this.game));
+            dispose();
         }
 
     }
