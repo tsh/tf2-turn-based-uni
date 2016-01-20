@@ -35,6 +35,8 @@ public abstract class CharacterObject extends GameObject {
 
 
     abstract public void sayNo();
+    abstract public void sayMove();
+    abstract public void sayKill();
     abstract public float getMaxAttackDistance();
     abstract public float getMaxMoveDistance();
 

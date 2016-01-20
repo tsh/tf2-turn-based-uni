@@ -58,6 +58,7 @@ public class MyGame {
         if ((clickedObject instanceof EmptyGameObject)){
             if (canMove((CharacterObject)selectedObject, (EmptyGameObject) clickedObject)) {
                 this.gameObjectsManager.moveObject(selectedObject, clickedObject);
+                ((CharacterObject) selectedObject).sayMove();
                 endTurn();
             }
         }
@@ -65,6 +66,7 @@ public class MyGame {
         else if ((clickedObject instanceof CharacterObject) && !(selectedObject == clickedObject)){
             if (canAttack((CharacterObject)selectedObject, (CharacterObject)clickedObject)) {
                 this.gameObjectsManager.attackTarget(selectedObject, (CharacterObject) clickedObject);
+                ((CharacterObject) selectedObject).sayKill();
                 endTurn();
             }
         }

@@ -5,9 +5,16 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Demoman extends CharacterObject{
     Texture texture;
     Sound noSound;
+
+    List<Sound> noSounds = new ArrayList<Sound>();
+    List<Sound> moveSounds = new ArrayList<Sound>();
+    List<Sound> killSounds = new ArrayList<Sound>();
 
     public Demoman(Player player) {
         super(player);
@@ -16,6 +23,17 @@ public class Demoman extends CharacterObject{
         } else {
             this.texture = new Texture(Gdx.files.internal("characters/red_demo_alfa.png"));
         }
+
+        noSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/demo/no/Demoman_no01.wav")));
+        noSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/demo/no/Demoman_no02.wav")));
+
+        moveSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/demo/move/en_freedom.wav")));
+        moveSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/demo/move/en_get_em_boyos.wav")));
+
+        killSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/demo/kill/en_could_be_one.wav")));
+        killSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/demo/kill/en_gonna_kill_you.wav")));
+        killSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/demo/kill/en_reign_of_blood.wav")));
+        killSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/demo/kill/en_wee_lasses.wav")));
 
         // "NO" sound
         switch (prefs.getInteger("lang")) {
@@ -41,7 +59,15 @@ public class Demoman extends CharacterObject{
     }
 
     public void sayNo(){
-        noSound.play();
+        this.getRandomSound(this.noSounds).play();
+    }
+
+    public void sayMove(){
+        this.getRandomSound(this.moveSounds).play();
+    }
+
+    public void sayKill(){
+        this.getRandomSound(this.killSounds).play();
     }
 
     public void dispose(){

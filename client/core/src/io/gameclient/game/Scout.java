@@ -19,6 +19,8 @@ public class Scout extends CharacterObject {
             {1, 1, 1, 1}
     };
     List<Sound> noSounds = new ArrayList<Sound>();
+    List<Sound> moveSounds = new ArrayList<Sound>();
+    List<Sound> killSounds = new ArrayList<Sound>();
 
     public Scout(Player player){
         super(player);
@@ -29,6 +31,12 @@ public class Scout extends CharacterObject {
         noSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/no/Scout_jeers12.wav")));
         noSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/no/Scout_no01.wav")));
         noSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/no/Scout_no03.wav")));
+
+        moveSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/move/Scout_go01.wav")));
+
+        killSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/kill/Scout_domination19.wav")));
+        killSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/kill/Scout_dominationpyr04.wav")));
+        killSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/kill/Scout_dominationsct02.wav")));
     }
 
     public float getMaxAttackDistance(){return 1.6f;}
@@ -43,8 +51,22 @@ public class Scout extends CharacterObject {
         this.getRandomSound(this.noSounds).play();
     }
 
+    public void sayMove(){
+        this.getRandomSound(this.moveSounds).play();
+    }
+
+    public void sayKill(){
+        this.getRandomSound(this.killSounds).play();
+    }
+
     public void dispose(){
         for (Sound sound: this.noSounds){
+            sound.dispose();
+        }
+        for (Sound sound: this.moveSounds){
+            sound.dispose();
+        }
+        for (Sound sound: this.killSounds){
             sound.dispose();
         }
     }
