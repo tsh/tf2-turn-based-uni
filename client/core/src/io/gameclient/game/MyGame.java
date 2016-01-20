@@ -24,6 +24,7 @@ public class MyGame {
     }
 
     public void endTurn(){
+        gameObjectsManager.unselectObjects();
         gameObjectsManager.undoHighlightPattern();
         // switch players
         if (this.currentPlayer == this.redPlayer){

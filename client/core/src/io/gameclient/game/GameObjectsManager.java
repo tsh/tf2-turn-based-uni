@@ -156,4 +156,9 @@ public class GameObjectsManager {
             }
         }
     }
+
+    public void unselectObjects(){
+        this.currentlySelectedObject.setUnselected();
+        this.currentlySelectedObject = null;
+    }
 }
