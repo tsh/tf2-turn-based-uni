@@ -28,7 +28,7 @@ public class EndGameScreen implements Screen {
         }
         counter = 0;
 
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/background/Announcer_am_flawlessvictory01.wav"));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/background/the-art-of-war.mp3"));
         backgroundMusic.setVolume(0.5f);
         backgroundMusic.setLooping(true);
         backgroundMusic.play();

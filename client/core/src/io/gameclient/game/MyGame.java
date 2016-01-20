@@ -13,9 +13,11 @@ public class MyGame {
     GameObjectsManager gameObjectsManager;
     MyGameUi ui;
     Tf2Client game;
+    GameScreen gameScreen;
 
-    public MyGame(Tf2Client gam){
+    public MyGame(Tf2Client gam, GameScreen gs){
         this.game = gam;
+        this.gameScreen = gs;
         this.redPlayer = new Player(Team.RED, false);
         this.bluePlayer = new Player(Team.BLUE, true);
         this.currentPlayer = this.bluePlayer;
@@ -41,10 +43,12 @@ public class MyGame {
         if (liveBlue == 0 ){
             this.game.setScreen(new EndGameScreen(Team.RED, this.game));
             dispose();
+            gameScreen.dispose();
         }
         if (liveRed == 0 ){
             this.game.setScreen(new EndGameScreen(Team.BLUE, this.game));
             dispose();
+            gameScreen.dispose();
         }
 
     }

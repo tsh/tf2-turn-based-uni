@@ -2,6 +2,7 @@ package io.gameclient.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,6 +23,7 @@ public class GameScreen implements Screen {
     MyGame tf2Game;
     private OrthographicCamera camera;
     Viewport viewport;
+    Music backgroundMusic;
 
     public GameScreen(final Tf2Client gam){
         game = gam;
@@ -36,8 +38,13 @@ public class GameScreen implements Screen {
         // opt: 600, 500
         this.world = new World();
         this.map = new Map();
-        this.tf2Game = new MyGame(gam);
+        this.tf2Game = new MyGame(gam, this);
         Gdx.input.setInputProcessor(new MyInputHandler(camera, this.tf2Game));
+
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/background/the-art-of-war.mp3"));
+        backgroundMusic.setVolume(0.1f);
+        backgroundMusic.setLooping(true);
+        backgroundMusic.play();
     }
 
     @Override
@@ -82,6 +89,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        this.tf2Game.dispose();
+        this.backgroundMusic.dispose();
     }
 }
