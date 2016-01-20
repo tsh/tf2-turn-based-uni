@@ -16,6 +16,7 @@ public class Demoman extends CharacterObject{
         } else {
             this.texture = new Texture(Gdx.files.internal("characters/red_demo_alfa.png"));
         }
+
         // "NO" sound
         switch (prefs.getInteger("lang")) {
             case Langs.EN:
@@ -41,6 +42,10 @@ public class Demoman extends CharacterObject{
 
     public void sayNo(){
         noSound.play();
+    }
+
+    public void dispose(){
+        this.noSound.dispose();
     }
 
 }

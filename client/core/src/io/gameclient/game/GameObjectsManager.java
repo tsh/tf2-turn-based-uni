@@ -148,4 +148,12 @@ public class GameObjectsManager {
         Vector2 destPosition = getObjectPositionVector(dest);
         return originPosition.dst(destPosition);
     }
+
+    public void dispose(){
+        for (int i = 0; i < gameObjectsMap.length; i++){
+            for (int j = 0; j < gameObjectsMap[i].length; j++){
+                gameObjectsMap[i][j].dispose();
+            }
+        }
+    }
 }

@@ -3,15 +3,21 @@ package io.gameclient.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Sound;
+
+import java.util.List;
+import java.util.Random;
 
 public abstract class CharacterObject extends GameObject {
     public Player player;
 
     Preferences prefs;
+    Random random;
 
     public CharacterObject(Player player){
         this.player = player;
         prefs = Gdx.app.getPreferences("Preferences");
+        this.random = new Random();
     }
 
     public boolean canAttack(CharacterObject target, float distanceToTarget){
@@ -32,4 +38,8 @@ public abstract class CharacterObject extends GameObject {
     abstract public float getMaxAttackDistance();
     abstract public float getMaxMoveDistance();
 
+    public Sound getRandomSound(List<Sound> soundsArray){
+        int randomIndex = this.random.nextInt(soundsArray.size());
+        return soundsArray.get(randomIndex);
+    }
 }

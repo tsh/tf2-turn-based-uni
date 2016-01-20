@@ -78,14 +78,12 @@ public class MyGame {
 
     public boolean canMove(CharacterObject movable, EmptyGameObject destination){
         float distance = this.gameObjectsManager.getDistanceBetweenObjects(movable, destination);
-        System.out.println("Move dist: " + distance);
         return movable.canMove(distance);
     };
 
 
     public boolean canAttack(CharacterObject attacker, CharacterObject target){
         float distance = this.gameObjectsManager.getDistanceBetweenObjects(attacker, target);
-        System.out.println("Attack dist: " + distance);
         return attacker.canAttack(target, distance);
     }
 

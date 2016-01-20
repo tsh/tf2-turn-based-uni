@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
-public class GameObject {
+public abstract class GameObject {
     public boolean isSelected = false;
     public boolean isHilightedMove = false;
     public boolean isHilightedAttack = false;
@@ -49,4 +49,10 @@ public class GameObject {
 
     public void setHighlightedAttackTrue(){this.isHilightedAttack = true;}
     public void setHighlightedAttackFalse(){this.isHilightedAttack = false;}
+
+    public void dispose(){
+        this.selectionTexture.dispose();
+        this.hilightMoveTexture.dispose();
+        this.highligtAttackTexture.dispose();
+    };
 }
