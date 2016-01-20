@@ -34,6 +34,9 @@ public class Scout extends CharacterObject {
         noSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/no/Scout_no03.wav")));
 
         moveSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/move/Scout_go01.wav")));
+        moveSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/move/Scout_battlecry03.wav")));
+        moveSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/move/Scout_battlecry04.wav")));
+        moveSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/move/Scout_battlecry05.wav")));
 
         killSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/kill/Scout_domination19.wav")));
         killSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/scout/kill/Scout_dominationpyr04.wav")));
