@@ -21,7 +21,7 @@ public class GameObjectsManager {
                 {new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()},
                 {new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(),},
                 {new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()},
-                {new Scout(game.bluePlayer), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject()}
+                {new Scout(game.bluePlayer), new EmptyGameObject(), new EmptyGameObject(), new EmptyGameObject(), new Demoman(game.redPlayer)}
         };
     }
 
